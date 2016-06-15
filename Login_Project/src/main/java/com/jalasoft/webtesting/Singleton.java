@@ -21,7 +21,6 @@ public class Singleton {
         if(driver == null)
         {
             driver = new FirefoxDriver();
-            return driver;
         }
 
         return driver;
