@@ -1,36 +1,46 @@
 package com.jalasoft.webtesting;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  * Created by danielgonzales on 6/15/2016.
  */
-public class Dashboard extends Singleton {
+public class Dashboard extends PagesPivotal {
 
-       private final By userNameText;
+    @FindBy(className = "tc_dropdown_name")
+    private WebElement userNameText;
 
     @FindBy(id = "create_new_project_button")
     private WebElement createProjectButton;
 
-        public Dashboard(WebDriver driver) {
-            super();
-            PageFactory.initElements(driver, this);
-            userNameText = By.className("tc_dropdown_name");
-        }
+    //Example xpath=//input[@name='name2' and @value='yes']
+    @FindBy(css = ".hover_link.settings")
+    private WebElement settingsProjectButton;
 
-        public String getUserNameText() {
+    @FindBy(id = "notice")
+    private WebElement messageDeleteProject;
 
-            return driver.findElement(userNameText).getText();
-        }
+    public String getUserNameText() {
+        return userNameText.getText();
+    }
 
     public FormCreateProject clickCreateProjectButton() {
         createProjectButton.click();
-        return new FormCreateProject(driver);
+        return new FormCreateProject();
     }
 
+    public Settings_Project clickSettingsProjectButton() {
+
+        settingsProjectButton.click();
+        return new Settings_Project();
     }
+
+    public String getMessageDeleteProject() {
+
+        return messageDeleteProject.getText();
+    }
+
+
+}
 

@@ -3,10 +3,7 @@ package com.jalasoft.webtesting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by danielgonzales on 6/15/2016.
- */
-public class Project extends Singleton {
+public class Project extends PagesPivotal {
 
     private final By projectNameText;
 

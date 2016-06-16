@@ -2,12 +2,8 @@ package com.jalasoft.webtesting;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-/**
- * Created by danielgonzales on 6/15/2016.
- */
-public class PivotalHome extends Singleton {
+public class PivotalHome extends PagesPivotal {
 
     private static final String PIVOTAL_TRACKER_URL = "https://www.pivotaltracker.com/";
 
@@ -15,13 +11,12 @@ public class PivotalHome extends Singleton {
     private WebElement signInLink;
 
     public PivotalHome() {
-        super();
         driver.get(PIVOTAL_TRACKER_URL);
-        PageFactory.initElements(driver, this);
     }
 
     public Login clickSignInLink() {
         signInLink.click();
-        return new Login(driver);
+        return new Login();
     }
+
 }
