@@ -8,7 +8,7 @@ public class TestFormCreateProject {
         @Test
     public void testCreateProject() {
 
-        String projectName = "Test_Selenium115";
+        String projectName = "Test_Selenium118";
 
         PivotalHome pivotalHome = new PivotalHome();
         Login login = pivotalHome.clickSignInLink();
@@ -18,7 +18,8 @@ public class TestFormCreateProject {
         FormCreateProject formCreateProject = dashboard.clickCreateProjectButton();
         formCreateProject.setProjectNameTextField(projectName);
         formCreateProject.clickListBox();
-        formCreateProject.selectAccountOfListBox("rosario project");
+        formCreateProject.selectAccountOfListBox();
+        formCreateProject.checkProjectPublicCheckBox();
         Project project = formCreateProject.clickCreateButton();
         Assert.assertEquals(projectName, project.getProjectNameText());
     }

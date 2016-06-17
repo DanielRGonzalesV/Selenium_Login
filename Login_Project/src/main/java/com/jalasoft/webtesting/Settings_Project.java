@@ -33,7 +33,6 @@ public class Settings_Project extends PagesPivotal {
 
     public void clickDeleteProjectLink() {
         deleteProjectLink.click();
-
     }
 
     public Dashboard clickConfirmDeleteProjectButton() {
@@ -49,11 +48,12 @@ public class Settings_Project extends PagesPivotal {
     }
 
     public void editDescriptionProject(String newDescriptionProject){
-        projectNameTextField.clear();
-        projectNameTextField.sendKeys(newDescriptionProject);
+        projectDescriptionTextField.clear();
+        projectDescriptionTextField.sendKeys(newDescriptionProject);
     }
 
     public void clickSaveSettingProjectButton() {
+
         saveSettingProjectButton.click();
     }
 

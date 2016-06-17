@@ -1,7 +1,5 @@
 package com.jalasoft.webtesting;
 
-import java.util.List;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,8 +8,11 @@ import org.openqa.selenium.support.FindBy;
  */
 public class FormCreateProject extends PagesPivotal {
 
-    @FindBy(className = "tc_select_account_name")
-    private List<WebElement> myList;
+    @FindBy(css= ".tc_select_account_name")
+    private WebElement accountListBox;
+
+    @FindBy(xpath = ".//*[@id='tc_public_project']/input")
+    private WebElement projectPublicCheckBox;
 
     @FindBy(className = "tc_form_input")
     private WebElement projectNameTextField;
@@ -35,23 +36,23 @@ public class FormCreateProject extends PagesPivotal {
     }
 
 
-    public void selectAccountOfListBox(String myAccount) {
+    public void selectAccountOfListBox() {
 
-        for (WebElement ele : myList) {
-
-            if (ele.getText().equalsIgnoreCase(myAccount)) {
-                ele.click();
-                break;
-            }
-
+        if(!accountListBox.isSelected()){
+            accountListBox.click();
         }
+    }
 
+    public void checkProjectPublicCheckBox() {
+
+        if(!projectPublicCheckBox.isSelected()){
+            projectPublicCheckBox.click();
+        }
     }
 
     public Project clickCreateButton() {
         createProjectButton.click();
-        return new Project(driver);
+        return new Project();
     }
-
 
 }

@@ -22,6 +22,7 @@ public class Dashboard extends PagesPivotal {
     private WebElement messageDeleteProject;
 
     public String getUserNameText() {
+
         return userNameText.getText();
     }
 

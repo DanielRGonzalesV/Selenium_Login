@@ -1,26 +1,47 @@
 package com.jalasoft.webtesting;
 
-        import org.junit.Assert;
-        import org.junit.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-/**
- * Created by danielgonzales on 6/16/2016.
- */
 public class TestSettings_Project {
 
-    @Test
-    public void testEditProject() {
+    private static Settings_Project settings_project;
+    private static Dashboard dashboard;
 
-        String messageChangesSaved = "Changes saved.";
+    @Before
+    public void setUpClass() throws Exception {
+
+        String projectName = "Test_Selenium_bef";
 
         PivotalHome pivotalHome = new PivotalHome();
         Login login = pivotalHome.clickSignInLink();
         login.setUserNameTextField("walter_mercado_jala");
         login.setPasswordTextField("P@ssw0rd");
-        Dashboard dashboard = login.clickSignInButton();
-        Settings_Project settings_project = dashboard.clickSettingsProjectButton();
-        settings_project.editNameProject("New Project 1");
-        settings_project.editDescriptionProject("descrip 1");
+        dashboard = login.clickSignInButton();
+        //create Project
+        FormCreateProject formCreateProject = dashboard.clickCreateProjectButton();
+        formCreateProject.setProjectNameTextField(projectName);
+        formCreateProject.clickListBox();
+        formCreateProject.selectAccountOfListBox();
+        formCreateProject.checkProjectPublicCheckBox();
+        Project project = formCreateProject.clickCreateButton();
+        settings_project = project.clickSettingsProjectTab();
+
+    }
+
+    @Test
+    public void testEditProject() {
+
+
+        String projectNewName = "Test_Selenium88888888888";
+        String projectDescription = "Description 3333";
+        String messageChangesSaved = "Changes saved.";
+
+
+        //Edit
+        settings_project.editNameProject(projectNewName);
+        settings_project.editDescriptionProject(projectDescription);
         settings_project.clickSaveSettingProjectButton();
         Assert.assertEquals(messageChangesSaved, settings_project.messageSavedChangesSettings());
 
@@ -29,14 +50,9 @@ public class TestSettings_Project {
     @Test
     public void testDeleteProject() {
 
-        String messageProjectDeleted = "rosario project was successfully deleted.";
+        String messageProjectDeleted = "Test_delete was successfully deleted.";
 
-        PivotalHome pivotalHome = new PivotalHome();
-        Login login = pivotalHome.clickSignInLink();
-        login.setUserNameTextField("walter_mercado_jala");
-        login.setPasswordTextField("P@ssw0rd");
-        Dashboard dashboard = login.clickSignInButton();
-        Settings_Project settings_project = dashboard.clickSettingsProjectButton();
+        //Delete
         settings_project.clickDeleteProjectLink();
         dashboard = settings_project.clickConfirmDeleteProjectButton();
         Assert.assertEquals(messageProjectDeleted, dashboard.getMessageDeleteProject());
